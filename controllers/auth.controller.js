@@ -60,7 +60,24 @@ const ALLOWED_DEPARTMENTS = ALLOWED_BRANCHES;
  *                 type: string
  *               branch:
  *                 type: string
- *                 enum: [Automobile engineering, Biotechnology, Chemical engineering, Computer science & engineering, IoT & intelligent systems(CSE), Artificial intelligence & machine learning (CSE), Computer and communication engineering, Data science (CSE), Computer science and biosciences, Electrical & electronics engineering, Electrical and computer engineering, Electronics & communication engineering, VLSI Design and technology (Electronics engineering), Information technology, Mechanical engineering, Cyber security(CSE), Robotics and artificial intelligence]
+ *                 enum:
+ *                   - Automobile engineering
+ *                   - Biotechnology
+ *                   - Chemical engineering
+ *                   - Computer science & engineering
+ *                   - IoT & intelligent systems (CSE)
+ *                   - Artificial intelligence & machine learning (CSE)
+ *                   - Computer and communication engineering
+ *                   - Data science (CSE)
+ *                   - Computer science and biosciences
+ *                   - Electrical & electronics engineering
+ *                   - Electrical and computer engineering
+ *                   - Electronics & communication engineering
+ *                   - VLSI Design and technology (Electronics engineering)
+ *                   - Information technology
+ *                   - Mechanical engineering
+ *                   - Cyber security (CSE)
+ *                   - Robotics and artificial intelligence
  *               currentYear:
  *                 type: integer
  *                 minimum: 1
@@ -206,7 +223,24 @@ export const registerStudent = async (req, res) => {
  *               department:
  *                 type: string
  *                 description: Department name (must be from allowed departments list)
- *                 enum: [Automobile engineering, Biotechnology, Chemical engineering, Computer science & engineering, IoT & intelligent systems(CSE), Artificial intelligence & machine learning (CSE), Computer and communication engineering, Data science (CSE), Computer science and biosciences, Electrical & electronics engineering, Electrical and computer engineering, Electronics & communication engineering, VLSI Design and technology (Electronics engineering), Information technology, Mechanical engineering, Cyber security(CSE), Robotics and artificial intelligence]
+ *                 enum:
+ *                   - Automobile engineering
+ *                   - Biotechnology
+ *                   - Chemical engineering
+ *                   - Computer science & engineering
+ *                   - IoT & intelligent systems (CSE)
+ *                   - Artificial intelligence & machine learning (CSE)
+ *                   - Computer and communication engineering
+ *                   - Data science (CSE)
+ *                   - Computer science and biosciences
+ *                   - Electrical & electronics engineering
+ *                   - Electrical and computer engineering
+ *                   - Electronics & communication engineering
+ *                   - VLSI Design and technology (Electronics engineering)
+ *                   - Information technology
+ *                   - Mechanical engineering
+ *                   - Cyber security (CSE)
+ *                   - Robotics and artificial intelligence
  *               email:
  *                 type: string
  *                 format: email
@@ -762,6 +796,9 @@ export const verifyProfileUpdateOTP = async (req, res) => {
  *         description: Logout successful
  */
 export const logout = async (req, res) => {
+  // Clear the JWT token by clearing the cookie
+  res.clearCookie("token");
+
   res.status(200).json({
     success: true,
     message: "Logged out successfully",
@@ -794,7 +831,7 @@ export const getMe = async (req, res) => {
 
     let profile = null;
     if (user.role === "student") {
-      profile = await Student.findOne({ user: user._id });
+      profile = await Student.findOne({ user: user._id }).select("-__v");
     } else if (user.role === "faculty") {
       profile = await Faculty.findOne({ user: user._id }).populate(
         "department"

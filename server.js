@@ -85,7 +85,12 @@ const limiter = rateLimit({
 app.use("/api", limiter);
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Replace with your frontend's origin
+    credentials: true, // Allow cookies to be sent
+  })
+);
 app.use(express.json());
 app.use(cookieParser());
 
@@ -128,6 +133,7 @@ app.use((err, req, res, next) => {
 
 // Start server
 const PORT = process.env.PORT || 5001;
+
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
   console.log(`API Documentation available at http://localhost:${PORT}/docs`);
