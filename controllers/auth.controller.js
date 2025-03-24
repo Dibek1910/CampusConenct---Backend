@@ -786,23 +786,28 @@ export const verifyProfileUpdateOTP = async (req, res) => {
 /**
  * @swagger
  * /api/auth/logout:
- *   get:
+ *   post:
  *     summary: Logout user
  *     tags: [Authentication]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Logout successful
  */
 export const logout = async (req, res) => {
-  // Clear the JWT token by clearing the cookie
-  res.clearCookie("token");
-
-  res.status(200).json({
-    success: true,
-    message: "Logged out successfully",
-  });
+  try {
+    // No need to check authentication since we're just logging out
+    // Just return success
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  } catch (error) {
+    console.error("Logout error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error during logout",
+    });
+  }
 };
 
 /**

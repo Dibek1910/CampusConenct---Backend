@@ -34,7 +34,7 @@ router.post("/profile-update/send-otp", protect, sendProfileUpdateOTP);
 router.post("/profile-update/verify-otp", protect, verifyProfileUpdateOTP);
 
 // User routes
-router.get("/logout", protect, logout);
+router.post("/logout", logout); // Changed from GET to POST and removed protect middleware
 router.get("/me", protect, getMe);
 
 export default router;
