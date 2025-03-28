@@ -137,7 +137,7 @@ export const updateFacultyProfile = async (req, res) => {
  *             properties:
  *               day:
  *                 type: string
- *                 enum: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+ *                 enum: [Monday, Tuesday, Wednesday, Thursday, Friday]
  *               startTime:
  *                 type: string
  *                 pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
@@ -214,7 +214,7 @@ export const addAvailabilitySlot = async (req, res) => {
  *             properties:
  *               day:
  *                 type: string
- *                 enum: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+ *                 enum: [Monday, Tuesday, Wednesday, Thursday, Friday]
  *               startTime:
  *                 type: string
  *                 pattern: '^([01]\d|2[0-3]):([0-5]\d)$'

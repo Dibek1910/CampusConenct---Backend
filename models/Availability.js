@@ -20,7 +20,7 @@ import mongoose from "mongoose";
  *           description: Reference to Faculty model
  *         day:
  *           type: string
- *           enum: [Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday]
+ *           enum: [Monday, Tuesday, Wednesday, Thursday, Friday]
  *         startTime:
  *           type: string
  *           pattern: '^([01]\d|2[0-3]):([0-5]\d)$'
@@ -48,15 +48,7 @@ const availabilitySchema = new mongoose.Schema(
     },
     day: {
       type: String,
-      enum: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-      ],
+      enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
       required: true,
     },
     startTime: {
